@@ -517,7 +517,7 @@ var Outside = {
 				var curIncome = $SM.getIncome(worker);
 				for(var store in income.stores) {
 					var bonus = 1
-					if ($SM.hasPerk("adhd")) bonus = 1.75
+					if ($SM.hasPerk("adhd")) bonus = 1.25
 					stores[store] = income.stores[store] * num * bonus;
 					if(curIncome[store] != stores[store]) needsUpdate = true;
 					var row = $('<div>').addClass('storeRow');
