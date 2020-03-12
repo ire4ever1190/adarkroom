@@ -39,6 +39,7 @@ var StateManager = {
 			'outfit',      	// used to temporarily store the items to be taken on the path
 			'config',
 			'wait',			// mysterious wanderers are coming back
+			'timeDelta',    // time since last play
 			'cooldown'      // residual values for cooldown buttons
 		];
 
@@ -346,6 +347,22 @@ var StateManager = {
 			return existing;
 		}
 		return {};
+	},
+
+	timetravelIncome: function() {
+		var timeDelta = Math.floor((Date.now() - $SM.get("timeDelta"))/1000)
+		console.log(timeDelta)
+		var income = $SM.get("income")
+		for (var source in income) {
+			var rate = income[source]["delay"]
+			var timesElasped = Math.floor(timeDelta/rate)
+			for (var store in income[source]["stores"]) {
+				var offlineBonus = income[source]["stores"][store] * timesElasped
+				console.log(store + ": " + offlineBonus)
+				$SM.get("stores")[store] += offlineBonus
+				
+			}
+		}
 	},
 
 	collectIncome: function() {
