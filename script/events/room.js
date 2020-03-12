@@ -32,6 +32,16 @@ Events.Room = [
 						reward: { 'bait': 1 },
 						notification: _('traps are more effective with bait.')
 					},
+					'eat': {
+						text: _('buy sugar'),
+						cost: { 'fur': 200, 'wood': 200, 'teeth': 20 },
+						available: function() {
+							return !$SM.hasPerk('adhd');
+						},
+						onChoose: function() {
+							$SM.addPerk('adhd');
+						}
+					},
 					'buyCompass': {
 						available: function() {
 							return $SM.get('stores.compass', true) < 1;

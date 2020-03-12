@@ -67,6 +67,16 @@
 				name: _('gastronome'),
 				desc: _('restore more health when eating'),
 				notify: _('learned to make the most of food')
+			},
+			'adhd': {
+				name: _('ADHD'),
+				desc: _('People work a bit faster'),
+				notify: _('You had too much sugar'),
+				onget: () => {
+					// for (incomeSource in Outside._INCOME) {
+					// 	Outside._INCOME[incomeSource].delay = Outside._INCOME[incomeSource].delay * .75
+					// }
+				}
 			}
 		},
 

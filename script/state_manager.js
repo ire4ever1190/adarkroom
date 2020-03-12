@@ -325,6 +325,7 @@ var StateManager = {
 	//PERKS
 	addPerk: function(name) {
 		$SM.set('character.perks["'+name+'"]', true);
+		Engine.Perks[name].onget ? Engine.Perks[name].onget() : Engine.log("perk has no onget function")
 		Notifications.notify(null, Engine.Perks[name].notify);
 	},
 
@@ -397,7 +398,7 @@ var StateManager = {
 					}
 					changed = true;
 					if(typeof income.delay == 'number') {
-						income.timeLeft = income.delay;
+						income.timeLeft = income.delay
 					}
 				}
 			}
