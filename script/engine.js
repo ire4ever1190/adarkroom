@@ -244,6 +244,7 @@
 					$('#saveNotify').css('opacity', 1).animate({opacity: 0}, 1000, 'linear');
 					Engine._lastNotify = Date.now();
 				}
+				State["timeDelta"] = Date.now()
 				localStorage.gameState = JSON.stringify(State);
 			}
 		},
@@ -251,13 +252,17 @@
 		loadGame: function() {
 			try {
 				var savedState = JSON.parse(localStorage.gameState);
+				// Gets the time delta and adds that income to the player
+
 				if(savedState) {
 					State = savedState;
 					$SM.updateOldState();
+					$SM.timetravelIncome();
 					Engine.log("loaded save!");
 				}
 			} catch(e) {
 				State = {};
+				console.log(e)
 				$SM.set('version', Engine.VERSION);
 				Engine.event('progress', 'new game');
 			}
