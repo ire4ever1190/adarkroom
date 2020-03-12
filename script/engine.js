@@ -272,6 +272,7 @@
 				}
 			} catch(e) {
 				State = {};
+				console.log(localStorage.gameState)
 				console.log(e)
 				$SM.set('version', Engine.VERSION);
 				Engine.event('progress', 'new game');

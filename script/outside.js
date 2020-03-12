@@ -507,11 +507,6 @@ var Outside = {
 	updateVillageIncome: function() {		
 		for(var worker in Outside._INCOME) {
 			var income = Outside._INCOME[worker];
-			if ($SM.hasPerk("adhd")) { 
-				for (var store in income.stores) {
-					income.stores[store] *= 1.25
-				}
-			} 
 			var num = worker == 'gatherer' ? Outside.getNumGatherers() : $SM.get('game.workers["'+worker+'"]');
 			if(typeof num == 'number') {
 				var stores = {};
@@ -521,7 +516,9 @@ var Outside = {
 				var needsUpdate = false;
 				var curIncome = $SM.getIncome(worker);
 				for(var store in income.stores) {
-					stores[store] = income.stores[store] * num;
+					var bonus = 1
+					if ($SM.hasPerk("adhd")) bonus = 1.75
+					stores[store] = income.stores[store] * num * bonus;
 					if(curIncome[store] != stores[store]) needsUpdate = true;
 					var row = $('<div>').addClass('storeRow');
 					$('<div>').addClass('row_key').text(_(store)).appendTo(row);
